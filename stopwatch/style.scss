@@ -1,8 +1,15 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background-color: rgb(51, 50, 50);
+  background-color: rgb(31, 30, 30);
   display: flex;
   justify-content: center;
-  margin-top: 10rem;
+
+  // margin-top: 6rem;
 }
 
 main {
@@ -62,3 +69,115 @@ main {
 }
 }
 
+
+.container {
+  position: relative;
+}
+
+.clock{
+
+  width: 350px;
+  height: 350px;
+  background-color: black;
+  margin: auto;
+  border-radius: 50%;
+  outline: 5px solid gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-position: center;
+ 
+  & .wrapper{
+
+    position: relative;
+    width: 330px;
+    height: 330px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .9rem;
+
+    & .number-hours{
+
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+
+      & span{
+
+        position: absolute;
+        transform:rotate(calc(var(--index)* 30deg));
+        inset:6px;
+        text-align: center;
+       
+
+        & p{
+
+          transform:rotate(calc(var(--index)* -30deg));
+          font-size: 1.3rem;
+        }
+
+      }
+    
+
+    }
+
+    & .clock-bar-seconds span{
+
+      position: absolute;
+      transform:rotate(calc(var(--index) * 6deg));
+      inset: -15px;
+      text-align: center;
+
+     
+      & p{
+
+        display: inline-block;
+        // width: 4px;
+        // height: 15px;
+        background-color: rgb(119, 118, 118);
+        transform: translateY(1px);
+      
+        font-size: 5px;
+
+       
+      }
+
+     
+    }
+
+
+    & .clock-hands{
+
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      & .hand{
+        position: absolute;
+        display: flex;
+        justify-content: center;
+
+        & i{
+
+          display: inline-block;
+          transform-origin: bottom;
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+  
+}
+
+
+
+.clock-bar-seconds span:nth-child(5n) p{
+  width: 6px;
+  height: 10px;
+  background-color: rgb(119, 118, 118);
+
+}
