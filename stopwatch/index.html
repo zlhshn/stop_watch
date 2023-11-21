@@ -1,14 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="./img/watch.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StopWatch App</title>
   </head>
   <body>
-    
-    <div id="app"></div>
+    <main>
+      <div id="watch">00:00:00:00</div>
+
+      <div id="buttons">
+        <button id="reset" class="reset">Reset</button>
+        <button id="start" class="start">Start</button>
+      </div>
+
+      <div id="tour">
+        <li>
+          <div><span class="tour">1.</span>tour</div>
+          <span class="tourNumber">00:00:00:00</span>
+        </li>
+      </div>
+    </main>
+
     <script type="module" src="/main.js"></script>
   </body>
 </html>

@@ -1,0 +1,64 @@
+body {
+  background-color: rgb(51, 50, 50);
+  display: flex;
+  justify-content: center;
+  margin-top: 10rem;
+}
+
+main {
+  font-size: 6rem;
+  color: white;
+  text-align: center;
+
+  & .reset {
+    background-color: gray;
+    color: white;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: none;
+    outline: 1px solid gray;
+    outline-offset: 3px;
+    cursor: pointer;
+    margin: 4.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  & .start{
+    
+    @extend .reset;
+    color: green;
+    background-color: rgb(66, 92, 66);
+    outline: 1px solid rgb(66, 92, 66);
+
+  }
+
+  & .dur{
+
+    @extend .reset;
+    color: red;
+    background-color: rgb(224, 85, 85);
+    outline: 1px solid rgb(235, 104, 104);
+}
+
+
+& #tour{
+
+    list-style-type: none;
+  
+    font-size: 2.5rem;
+
+    & li{
+
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid rgb(161, 161, 161);
+        border-bottom: 1px solid rgb(161, 161, 161);
+    }
+}
+}
+
