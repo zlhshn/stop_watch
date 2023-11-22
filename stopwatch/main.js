@@ -14,11 +14,14 @@ const showTime = () => {
     if (salise == 100) {
         salise = 0;
         seconds++;
+        updateSecondHand();
+       
     }
 
     if (seconds == 60) {
         seconds = 0;
         minutes++;
+       
 
         if (minutes == 60) {
             minutes = 0;
@@ -43,22 +46,12 @@ const watchStart = () => {
         clearInterval(timer);
     }
     timer = setInterval(showTime, 10);
+    // updateSecondHand();
 };
 
 
 
 
-// startButton.addEventListener('click',()=>{
-
-//     watchStart()
-// })
-
-
-// resetButton.addEventListener('click',()=>{
-//     clearInterval(timer);
-//     displayTime.innerHTML  = '00:00:00:00'
-
-// })
 
 
 startButton.addEventListener('click', (e) => {
@@ -67,11 +60,13 @@ startButton.addEventListener('click', (e) => {
         e.target.classList.remove('dur');
         startButton.innerHTML = 'Start';
         resetButton.innerHTML = 'Reset';
+        isRunning = false;
     } else {
         e.target.classList.add('dur');
         startButton.innerHTML = 'Stop';
         resetButton.innerHTML = 'Tour';
         watchStart();
+        isRunning = true;
     }
 });
 
@@ -84,7 +79,10 @@ resetButton.addEventListener('click', (e) => {
         [salise, seconds, minutes, hours] = [0, 0, 0, 0];
         displayTime.innerHTML = '00:00:00:00';
         tourList.innerHTML = '';
+        resetSecondHand()
         tour = 1; // Reset tour count
+       
+        isRunning = false;
     } else if (e.target.innerHTML === 'Tour') {
         // You might want to modify this part as needed
         tourList.innerHTML += `<li>
@@ -121,3 +119,32 @@ for (let i = 1; i <= 60; i++){
 
 clockbarseconds.insertAdjacentHTML ("afterbegin", clockbarsecondsElement.join(""));
     
+
+
+let secOk = document.getElementById('sec');
+let secRotation = 0; // Initial rotation angle for the second hand
+let isRunning = false;
+
+const updateSecondHand = () => {
+    secRotation += 6; // Assuming 6 degrees per second, adjust as needed
+    secOk.style.transform = `rotate(${secRotation}deg)`;
+};
+
+const resetSecondHand = () => {
+    secRotation = 0;
+    secOk.style.transition = 'transform 0s';
+    secOk.style.transform = `rotateY(${secRotation}deg)`;
+    setTimeout(() => {
+        secOk.style.transition = 'transform 0.5s ease';
+    }, 10);
+};
+
+const setInitialRotation = () => {
+    // Calculate initial rotation based on the current time
+    const now = new Date();
+    const secondsOfDay = now.getSeconds() + now.getMilliseconds() / 1000;
+    secRotation = (secondsOfDay % 60) * 6; // 6 degrees per second
+    secOk.style.transform = `rotate(${secRotation}deg)`;
+};
+
+setInitialRotation();
