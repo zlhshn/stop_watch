@@ -127,24 +127,31 @@ let isRunning = false;
 
 const updateSecondHand = () => {
     secRotation += 6; // Assuming 6 degrees per second, adjust as needed
-    secOk.style.transform = `rotate(${secRotation}deg)`;
+    secOk.style.transform = `rotate(${180 + secRotation}deg)`;
 };
 
 const resetSecondHand = () => {
     secRotation = 0;
     secOk.style.transition = 'transform 0s';
-    secOk.style.transform = `rotateY(${secRotation}deg)`;
+    secOk.style.transform = `rotate(${180 + secRotation}deg)`;
     setTimeout(() => {
         secOk.style.transition = 'transform 0.5s ease';
     }, 10);
 };
 
 const setInitialRotation = () => {
-    // Calculate initial rotation based on the current time
     const now = new Date();
-    const secondsOfDay = now.getSeconds() + now.getMilliseconds() / 1000;
-    secRotation = (secondsOfDay % 60) * 6; // 6 degrees per second
+    const currentSeconds = now.getSeconds();
+    const currentMinutes = now.getMinutes();
+    
+    // Calculate initial rotation for the analog clock
+    secRotation = 360 - (currentSeconds % 60) * 6; // 6 degrees per second
     secOk.style.transform = `rotate(${secRotation}deg)`;
+
+    // Set the initial time on the digital display
+   
 };
 
 setInitialRotation();
+
+
