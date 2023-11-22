@@ -39,8 +39,6 @@ const showTime = () => {
 
 
 
-
-
 const watchStart = () => {
     if (timer !== 0) {
         clearInterval(timer);
@@ -71,8 +69,8 @@ startButton.addEventListener('click', (e) => {
 });
 
 
-let tour = 1; // Initialize tour outside the event listener
-
+let tour = 1; 
+let tourArray = []
 resetButton.addEventListener('click', (e) => {
     if (e.target.innerHTML === 'Reset') {
         clearInterval(timer);
@@ -80,19 +78,25 @@ resetButton.addEventListener('click', (e) => {
         displayTime.innerHTML = '00:00:00:00';
         tourList.innerHTML = '';
         resetSecondHand()
-        tour = 1; // Reset tour count
+        tour = 1;
        
         isRunning = false;
     } else if (e.target.innerHTML === 'Tour') {
-        // You might want to modify this part as needed
+       
         tourList.innerHTML += `<li>
             <div><span class="tour">${tour}.</span>tour</div>
             <span class="tourNumber">${displayTime.innerHTML}</span>
         </li>`;
-        ++tour; // Increment tour count
+        ++tour; 
+
+      
+        tourArray.push(displayTime.innerHTML)
+        console.log(tourArray);
     }
 });
 
+
+// analog clock
 
 
 
@@ -122,13 +126,14 @@ clockbarseconds.insertAdjacentHTML ("afterbegin", clockbarsecondsElement.join(""
 
 
 let secOk = document.getElementById('sec');
-let secRotation = 0; // Initial rotation angle for the second hand
+let secRotation = 0; 
 let isRunning = false;
 
 const updateSecondHand = () => {
-    secRotation += 6; // Assuming 6 degrees per second, adjust as needed
+    secRotation += 6; 
     secOk.style.transform = `rotate(${180 + secRotation}deg)`;
 };
+
 
 const resetSecondHand = () => {
     secRotation = 0;
@@ -136,7 +141,7 @@ const resetSecondHand = () => {
     secOk.style.transform = `rotate(${180 + secRotation}deg)`;
     setTimeout(() => {
         secOk.style.transition = 'transform 0.5s ease';
-    }, 10);
+    }, 1);
 };
 
 const setInitialRotation = () => {
@@ -144,14 +149,15 @@ const setInitialRotation = () => {
     const currentSeconds = now.getSeconds();
     const currentMinutes = now.getMinutes();
     
-    // Calculate initial rotation for the analog clock
     secRotation = 360 - (currentSeconds % 60) * 6; // 6 degrees per second
     secOk.style.transform = `rotate(${secRotation}deg)`;
 
-    // Set the initial time on the digital display
-   
 };
+
 
 setInitialRotation();
 
+window.onload = () => {
 
+    resetSecondHand();
+};
